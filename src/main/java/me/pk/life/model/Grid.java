@@ -132,16 +132,7 @@ public class Grid {
      * Prints the grid on the console
      */
     public void print() {
-        for(int r=0;r<m;r++) {
-            for(int c=0;c<n;c++) {
-                System.out.print(cells(r,c)?1:0);
-                if(c==n-1) {
-                    System.out.println();
-                } else {
-                    System.out.print(" ");
-                }
-            }
-        }
+        System.out.println(this);
     }
 
     @Override
@@ -163,5 +154,21 @@ public class Grid {
         result = 31 * result + m;
         result = 31 * result + n;
         return result;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        for(int r=0;r<m;r++) {
+            for(int c=0;c<n;c++) {
+                builder.append(cells(r,c)?1:0);
+                if(c==n-1) {
+                    builder.append("\n");
+                } else {
+                    builder.append(" ");
+                }
+            }
+        }
+        return builder.toString();
     }
 }

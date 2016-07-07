@@ -7,6 +7,7 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 
 /**
+ * This renders the Grid on the console
  * Created by prasad on 07/07/2016.
  */
 public class ConsoleGridRenderer implements GridRenderer {
@@ -19,6 +20,6 @@ public class ConsoleGridRenderer implements GridRenderer {
 
     @Override
     public void render(Grid grid) {
-
+        printStream.print(grid);
     }
 }

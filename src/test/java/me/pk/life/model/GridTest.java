@@ -12,9 +12,9 @@ public class GridTest {
     @Test
     public void testRule1() throws Exception {
         // Given
-        Grid grid = new Grid(3,3);
-        grid.setLive(1,1);
-        grid.setLive(0,0);
+        Grid grid = new Grid(3, 3);
+        grid.setLive(1, 1);
+        grid.setLive(0, 0);
         grid.print();
         // 1,0,0
         // 0,1,0
@@ -24,68 +24,92 @@ public class GridTest {
         Grid nextGen = grid.nextGen();
         grid.print();
 
-        assertFalse("grid 0,0 should be false", nextGen.cells(0,0));
-        assertTrue("grid 0,1 should be true", nextGen.cells(0,1));
-        assertFalse("grid 0,2 should be false", nextGen.cells(0,2));
-        assertTrue("grid 1,0 should be true", nextGen.cells(1,0));
-        assertFalse("grid 1,1 should be false", nextGen.cells(1,1));
-        assertFalse("grid 1,2 should be false", nextGen.cells(1,2));
-        assertFalse("grid 2,0 should be false", nextGen.cells(2,0));
-        assertFalse("grid 2,1 should be false", nextGen.cells(2,1));
-        assertFalse("grid 2,2 should be false", nextGen.cells(2,2));
+        // Then
+
+        Grid expected = new Grid(3, 3);
+
+        System.out.println("expected");
+        expected.print();
+
+        System.out.println("actual");
+        nextGen.print();
+
+        assertEquals("the two should be equal", expected, nextGen);
     }
+
+    @Test
+    public void testRule3() throws Exception {
+        // Given
+        Grid grid = new Grid(3, 3);
+        grid.setLive(0, 0);
+        grid.setLive(1, 1);
+        grid.setLive(0, 0);
+        grid.print();
+        // 1,0,0
+        // 0,1,0
+        // 0,0,1
+
+        // When
+        Grid nextGen = grid.nextGen();
+        grid.print();
+
+        // Then
+
+        Grid expected = new Grid(3, 3);
+
+        System.out.println("expected");
+        expected.print();
+
+        System.out.println("actual");
+        nextGen.print();
+
+        assertEquals("the two should be equal", expected, nextGen);
+    }
+
 
     @Test
     public void testBlock() throws Exception {
         // Given
-        Grid grid = new Grid(4,4);
-        grid.setLive(1,1);
-        grid.setLive(1,2);
-        grid.setLive(2,1);
-        grid.setLive(2,2);
+        Grid grid = new Grid(4, 4);
+        grid.setLive(1, 1);
+        grid.setLive(1, 2);
+        grid.setLive(2, 1);
+        grid.setLive(2, 2);
         grid.print();
         System.out.println("setup done");
-        // 0,0,0,0
-        // 0,1,1,0
-        // 0,1,1,0
-        // 0,0,0,0
+//        0 0 0 0
+//        0 1 1 0
+//        0 1 1 0
+//        0 0 0 0
 
         // When
         Grid nextGen = grid.nextGen();
         nextGen.print();
 
-        //first row
-        assertFalse("grid 0,0 should be false", nextGen.cells(0,0));
-        assertFalse("grid 0,1 should be false", nextGen.cells(0,1));
-        assertFalse("grid 0,2 should be false", nextGen.cells(0,2));
-        assertFalse("grid 0,3 should be false", nextGen.cells(0,3));
+        // Then
 
-        //second row
-        assertFalse("grid 1,0 should be false", nextGen.cells(1,0));
-        assertTrue("grid 1,1 should be true", nextGen.cells(1,1));
-        assertTrue("grid 1,2 should be true", nextGen.cells(1,2));
-        assertFalse("grid 1,3 should be false", nextGen.cells(1,3));
+        Grid expected = new Grid(4, 4);
+        expected.setLive(1, 1);
+        expected.setLive(1, 2);
+        expected.setLive(2, 1);
+        expected.setLive(2, 2);
 
-        //third row
-        assertFalse("grid 2,0 should be false", nextGen.cells(2,0));
-        assertTrue("grid 2,1 should be true", nextGen.cells(2,1));
-        assertTrue("grid 2,2 should be true", nextGen.cells(2,2));
-        assertFalse("grid 2,3 should be false", nextGen.cells(2,3));
+        System.out.println("expected");
+        expected.print();
 
-        //fourth row
-        assertFalse("grid 3,0 should be false", nextGen.cells(3,0));
-        assertFalse("grid 3,1 should be false", nextGen.cells(3,1));
-        assertFalse("grid 3,2 should be false", nextGen.cells(3,2));
-        assertFalse("grid 3,3 should be false", nextGen.cells(3,3));
+        System.out.println("actual");
+        nextGen.print();
+
+        assertEquals("the two should be equal", expected, nextGen);
     }
 
     @Test
     public void testBlinker() throws Exception {
         // Given
-        Grid grid = new Grid(5,5);
-        grid.setLive(2,1);
-        grid.setLive(2,2);
-        grid.setLive(2,3);
+        Grid grid = new Grid(5, 5);
+        grid.setLive(2, 1);
+        grid.setLive(2, 2);
+        grid.setLive(2, 3);
         grid.print();
         System.out.println("setup done");
         // 0,0,0,0
@@ -98,10 +122,15 @@ public class GridTest {
         nextGen.print();
 
         //Expected
-        Grid expected = new Grid(5,5);
-        grid.setLive(1,2);
-        grid.setLive(2,2);
-        grid.setLive(3,2);
+        Grid expected = new Grid(5, 5);
+        expected.setLive(1, 2);
+        expected.setLive(2, 2);
+        expected.setLive(3, 2);
+        System.out.println("expected");
+        expected.print();
+
+        System.out.println("actual");
+        nextGen.print();
 
         assertEquals("the two should be equal", expected, nextGen);
     }
